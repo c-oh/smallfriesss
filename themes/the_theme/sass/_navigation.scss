@@ -1,132 +1,163 @@
-/*--------------------------------------------------------------
-# Navigation
---------------------------------------------------------------*/
-
-/* Links */
-
-a {
-	color: $color__link;
-
-	&:visited {
-		color: $color__link-visited;
-	}
-	&:hover,
-	&:focus,
-	&:active {
-		color: $color__link-hover;
-	}
-	&:focus {
-		outline: thin dotted;
-	}
-	&:hover,
-	&:active {
-		outline: 0;
-	}
-}
-
-/* Menus */
-
-.main-navigation {
-	clear: both;
-	display: block;
-	float: left;
-	width: 100%;
-
-	ul {
-		display: none;
-		list-style: none;
-		margin: 0;
-		padding-left: 0;
-
-		ul {
-			box-shadow: 0 3px 3px rgba(0, 0, 0, 0.2);
-			float: left;
-			position: absolute;
-			top: $base__space-unit;
-			left: -999rem;
-			z-index: 99999;
-
-			ul {
-				left: -999rem;
-				top: 0;
-			}
-
-			li {
-				&:hover > ul,
-				&.focus > ul {
-					left: 100%;
-				}
-			}
-
-			a {
-				width: 200px;
-			}
-
-			:hover > a,
-			.focus > a {
-			}
-
-			a:hover,
-			a.focus {
-			}
-		}
-
-		li:hover > ul,
-		li.focus > ul {
-			left: auto;
-		}
-	}
-	li {
-		float: left;
-		position: relative;
-
-		&:hover > a,
-		&.focus > a {
-		}
-	}
+ul {
 	a {
 		display: block;
-		text-decoration: none;
-	}
-
-	.current_page_item > a,
-	.current-menu-item > a,
-	.current_page_ancestor > a {
 	}
 }
-
-/* Small menu. */
-.menu-toggle,
-.main-navigation.toggled ul {
-	display: block;
-}
-
-@media screen and (min-width: 768px) {
-	.menu-toggle {
-		display: none;
-	}
-	.main-navigation ul {
-		display: block;
-	}
-}
-
-.comment-navigation,
-.posts-navigation,
-.post-navigation {
-
-	.site-main & {
-		margin: 0 0 $base__space-unit;
+ 
+//body css to control the menu
+body {
+	position: relative;
+	left: 0;
+	&.menu-push {
+		left: 200px;
 		overflow: hidden;
 	}
+} 
 
-	.nav-previous {
-		float: left;
-		width: 50%;
+//the slide out menu stuff
+#menu {
+	position: fixed;
+	width: 200px;
+	height: 100%;
+	top: 0;
+	left: -254px;
+	z-index: 1000;
+	background-color: #ffd813;
+	overflow: auto;
+	&.menu-open {
+		left: 0px;
+		margin-left: 0px;
 	}
+	li:first-child{
+		margin-top: 30px;
+	}
+	li{
+		margin-top: 10px;
+}
+}
 
-	.nav-next {
-		float: right;
-		text-align: right;
-		width: 50%;
+//transitions for the menu and body
+#menu,
+body {
+	-webkit-transition: all 0.3s ease;
+	-moz-transition: all 0.3s ease;
+	transition: all 0.3s ease;
+}
+
+//the nav icon and text container
+#nav-icon{
+	display: flex;
+	justify-content: space-between;
+	flex-wrap: wrap;
+	.icon-container{
+		display: flex;
+		z-index: 99;
+		margin-left: 20px;
+	}
+	.logo-container{
+		width: 50px;
+		z-index: 99;
+		margin-right: 20px;
+		margin-top: 10px;
+		img{
+			cursor: pointer;
+		}
+		@include tablet{
+		width: 65px;
+		}
 	}
 }
+
+.menu-tag {
+	color: white;
+	margin-left: 10px;
+	text-transform: uppercase;
+	font-weight: 300;
+	.menu-text {
+		margin-top: 14px;
+		letter-spacing: 2px;
+		&.expanded-text {
+			margin-top: 24px;
+		}
+	}
+} 
+
+// This makes the hamburger icon
+.hamburger {
+	margin-top: 10px;
+	cursor: pointer;
+	.bars {
+		margin-top: 5px;
+		background: #DAA520;
+		height: 5px;
+		width: 40px;
+		border-radius: 2.5px;
+		position: relative;
+		@include tablet{
+		height: 6px;
+		width: 47px;
+		}
+	}
+	.meat-cheese {
+		background: #8B4513;
+		&::after {
+			border: 5px solid yellow;
+			border-color: yellow transparent transparent transparent;
+			position: absolute;
+			content: "";
+			bottom: -10px;
+			right: 4px;
+			z-index: 99;
+			display: none;
+		}
+	}
+	.top-bread {
+		overflow: hidden;
+		transition: .3s all ease-in-out;
+		position: relative;
+		top: 0;
+	}
+	.seed-container {
+		margin-left: 10px;
+		.seed {
+			display: none;
+			width: 3px;
+			height: 2px;
+			background-color: #fdf1cb;
+			-webkit-border-radius: 10px;
+			-moz-border-radius: 10px;
+			border-radius: 10px;
+			-webkit-box-shadow: 1px 1px 0 rgba(0, 0, 0, 0.1);
+			-moz-box-shadow: 1px 1px 0 rgba(0, 0, 0, 0.1);
+			box-shadow: 1px 1px 0 rgba(0, 0, 0, 0.1);
+			top: -10px;
+			position: relative;
+			-webkit-transform: rotate(110deg);
+			-moz-transform: rotate(110deg);
+			-ms-transform: rotate(110deg);
+			-o-transform: rotate(110deg);
+			transform: rotate(110deg);
+		}
+	}
+	&.expanded {
+		.meat-cheese::after {
+			display: block;
+		}
+		.top-bread {
+			height: 18px;
+			border-bottom: 3px solid green;
+			border-radius: 20px 20px 2.5px 2.5px;
+			.seed {
+				display: inline-block;
+			}
+		}
+		.bread {
+			border-top: 2px solid red;
+		}
+		.meat-cheese {
+			border-bottom: 1px solid yellow;
+		}
+	}
+}
+
+
