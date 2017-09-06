@@ -1,0 +1,59 @@
+# Ignore OS files #
+# =============== #
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+*[Tt]humbs.db
+*.Trashes
+
+
+# Ignore logs and databases #
+# ========================= #
+*.log
+*.sql
+*.sqlite
+yarn.lock
+error_log
+access_log
+.php
+
+# Ignore packages #
+# =============== #
+*.7z
+*.dmg
+*.gz
+*.iso
+*.jar
+*.rar
+*.tar
+*.zip
+
+# Ignore everything in "wp-content" except the "plugins" and "themes" directories. #
+# ================================================================================ #
+/*
+!.gitignore
+!plugins/
+!themes/
+!README.md
+
+# Ignore everything in "plugins" except certain plugins. #
+# ========================================================== #
+plugins/*
+
+# Ignore everything in "themes" except the active theme. #
+# ====================================================== #
+themes/*
+!themes/the_theme/
+themes/the_theme/gulpfile.js
+
+# Ignore npm packages #
+# =================== #
+themes/the_theme/node_modules/*
+
+# Ignore build files #
+# ================== #
+themes/the_theme/gulpfile.js
+themes/the_theme/build/css/style.min.css
